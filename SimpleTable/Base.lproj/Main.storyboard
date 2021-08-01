@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="W0w-0J-qpM">
-                                    <rect key="frame" x="0.0" y="111.5" width="414" height="44"/>
+                                    <rect key="frame" x="0.0" y="154.5" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" title="Add Data"/>
                                     <connections>
@@ -44,6 +44,40 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="customCell" id="SMr-8d-VSP" customClass="CustomTableViewCell" customModule="SimpleTable" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="93.5" width="414" height="43"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SMr-8d-VSP" id="tFA-EL-kWe">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohV-TR-bvW">
+                                                    <rect key="frame" x="20" y="11" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0nv-xo-YUp">
+                                                    <rect key="frame" x="352" y="11" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="ohV-TR-bvW" secondAttribute="bottom" id="ABF-Nb-Wny"/>
+                                                <constraint firstItem="0nv-xo-YUp" firstAttribute="top" secondItem="tFA-EL-kWe" secondAttribute="topMargin" id="Kif-vR-Fb9"/>
+                                                <constraint firstItem="0nv-xo-YUp" firstAttribute="trailing" secondItem="tFA-EL-kWe" secondAttribute="trailingMargin" id="fMF-Lz-OAv"/>
+                                                <constraint firstItem="ohV-TR-bvW" firstAttribute="leading" secondItem="tFA-EL-kWe" secondAttribute="leadingMargin" id="l4T-Hb-Od7"/>
+                                                <constraint firstItem="0nv-xo-YUp" firstAttribute="bottom" secondItem="tFA-EL-kWe" secondAttribute="bottomMargin" id="p29-Sh-nB4"/>
+                                                <constraint firstItem="ohV-TR-bvW" firstAttribute="top" secondItem="tFA-EL-kWe" secondAttribute="topMargin" id="q2Q-cf-0j8"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="leftLabel" destination="ohV-TR-bvW" id="ejb-E3-HiQ"/>
+                                            <outlet property="rightLabel" destination="0nv-xo-YUp" id="AL3-Gr-Fsj"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

@@ -11,12 +11,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var tableView: UITableView!
     let cellIdentifier: String = "cell"
+    let customCellIdentifier: String = "customCell"
     let korean: [String] = ["가", "나", "다", "라", "마", "바", "사", "아", "자", "차", "카", "파", "타", "하"]
     let english: [String] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     var dates: [Date] = []
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
+        return formatter
+    }()
+    let timeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
         formatter.timeStyle = .medium
         return formatter
     }()
@@ -52,16 +57,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     // 옵셔널이 아니어서 UITableViewDataSource를 채택하면 무조건 구현해야 하는 메서드
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath)
-        
         if indexPath.section < 2 {
+            let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath)
             let text: String = indexPath.section == 0 ? korean[indexPath.row] : english[indexPath.row]
             cell.textLabel?.text = text
+            
+            return cell
         } else {
-            cell.textLabel?.text = self.dateFormatter.string(from: self.dates[indexPath.row])
+            guard let cell: CustomTableViewCell = tableView.dequeueReusableCell(withIdentifier: self.customCellIdentifier, for: indexPath) as? CustomTableViewCell else {
+                preconditionFailure("테이블 뷰 셀 가져오기 실패")
+            }
+            
+            cell.leftLabel.text = self.dateFormatter.string(from: self.dates[indexPath.row])
+            cell.rightLabel.text = self.timeFormatter.string(from: self.dates[indexPath.row])
+            
+            return cell
         }
-        
-        return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
