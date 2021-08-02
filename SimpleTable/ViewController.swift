@@ -58,9 +58,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // 옵셔널이 아니어서 UITableViewDataSource를 채택하면 무조건 구현해야 하는 메서드
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section < 2 {
+            // dequeueReusableCell: 재사용 큐에 쌓여있던 셀을 꺼내와서 사용한다는 의미
+            // let cell: UITableViewCell = UITableViewCell() 하지 않는 이유
             let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath)
             let text: String = indexPath.section == 0 ? korean[indexPath.row] : english[indexPath.row]
             cell.textLabel?.text = text
+            
+            // cell의 재사용 여부 확인용
+            if indexPath.row == 1 {
+                cell.backgroundColor = UIColor.yellow
+            } else {
+                // else를 추가해서 재사용된 셀이 다음에 다시 등장할 때 계속 노란색이 되는 걸 방지
+                cell.backgroundColor = UIColor.white
+            }
             
             return cell
         } else {
@@ -85,6 +95,30 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         return nil
+    }
+    
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+        
+        guard let nextViewController: SecondViewController = segue.destination as? SecondViewController else {
+            return
+        }
+        
+        guard let cell: UITableViewCell = sender as? UITableViewCell else {
+            return
+        }
+        
+        nextViewController.textToSet = cell.textLabel?.text
+        // 직접 outlet에 셋팅해주는 게 안되는 이유
+        // prepare과정에서 세그의 목적지가 되는 뷰 컨트롤러의 객체는 생성이 되어있지만
+        // 그 안의 뷰 요소들은 아직 메모리에 올라와있지 않은 상태라서
+        // label에 직접 넣어주려고 하면 런타임 에러가 발생한다
+        // 대신 ui에 보여지지 않는 요소라면 바로 전달해도 무방
+        // nextViewController.label.text = cell.textLabel?.text
     }
 }
 
